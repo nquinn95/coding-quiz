@@ -1,8 +1,6 @@
-//variables to keep track of time
 var questionsIndex = 0;
 
-//15 seconds per question about to be asked
-var time = 75;
+
 
 //keeps track of the time
 var timerId;
@@ -46,6 +44,10 @@ var questions = [
         answer: "C"
     }
 ];
+//variables to keep track of time
+
+var time = questions.length * 15;
+//15 seconds per question about to be asked
 
 
 
@@ -53,23 +55,23 @@ var questions = [
 function quizStart(){
     //hide the start screen during the quiz
     var startQuizEl = document.getElementById("start");
+    startQuizEl.setAttribute("class", "hide");
 
+
+    
     // make questions appear
 
-    questionsEl.removeAttribute("hide");
-
-    //show starting time on the page
-    clockCountDown();
+    questionsEl.removeAttribute("class");
+    choicesEl.removeAttribute("class");
 
 
 
-
-    getQuestions()
+    getQuestions();
 
 }
 
 
-//Get questions to show up
+//Get check which question that we want
 function getQuestions(){
 
     var currentQuestions = questions[questionsIndex];
@@ -87,7 +89,7 @@ function clickQuestions(){
 
 
 
-//end the quiz
+
 
 
 
@@ -106,7 +108,7 @@ function clockCountDown(){
 }
 
 
-
+//end the quiz
 function endQuiz(){
 
     clearInterval(timerId);
