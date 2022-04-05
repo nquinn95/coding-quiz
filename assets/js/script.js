@@ -109,6 +109,8 @@ function clockCountDown(){
 
 function endQuiz(){
 
+    clearInterval(timerId);
+
 
 }
 
