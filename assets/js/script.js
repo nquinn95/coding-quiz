@@ -3,7 +3,7 @@ var questionsIndex = 0;
 
 
 //keeps track of the time
-var timerId;
+//var timerId;
 
 
 //gettign variables for elements in the HTML
@@ -13,7 +13,8 @@ var choicesEl = document.getElementById("choices");
 var submitBtn = document.getElementById("submit");
 var intitialsEl = document.getElementById("intials");
 var startBtn = document.getElementById("start");
-
+var questionAppearedEl = document.getElementById("q-title");
+var countDown;
 
 
 //questions for quiz
@@ -46,39 +47,56 @@ var questions = [
 ];
 //variables to keep track of time
 
-var time = questions.length * 15;
+// var time = questions.length * 15; commented out for testing
+
+var time = 5;
 //15 seconds per question about to be asked
 
 
 
 //Start the quiz
 function quizStart(){
-    //hide the start screen during the quiz
-    var startQuizEl = document.getElementById("start");
-    startQuizEl.setAttribute("class", "hide");
 
-
-    
     // make questions appear
-
     questionsEl.removeAttribute("class");
+    questionAppearedEl.removeAttribute("class");
+    
+    //make choices appear
     choicesEl.removeAttribute("class");
 
+    // timer = setInterval(clockCountDown, 1000);
+    // timeEl.textContent = time;
 
 
+    clockCountDown();
     getQuestions();
+
 
 }
 
 
 //Get check which question that we want
 function getQuestions(){
-
-    var currentQuestions = questions[questionsIndex];
-
-
-
+    //gets a question from the questions using question index
+    var currentQuestion = questions[questionsIndex].title;
+    questionAppearedEl.textContent = currentQuestion;
+    var choicesBtn = "";
+    for(var i = 0; i < questions[questionsIndex].choices.length; i++){
+        var currentChoice = questions[questionsIndex].choices[i];
+        console.log(currentChoice);
+        choicesBtn = choicesBtn + `
+        <button> ${currentChoice} </button>
+        </br>`;
+        
+        //questionsEl.appendChild(questionAppearedEl, currentQuestion)
+    }
+    choicesEl.innerHTML = choicesBtn;
 }
+
+//choice button click and 
+//right or wrong answer
+//questions index ++ to move to the next question in the array.
+//execute getQestion function for next question
 
 
 //click questions and answers
@@ -96,29 +114,40 @@ function clickQuestions(){
 //time count
 function clockCountDown(){
    
-
+    //interval
+    countDown = setInterval(function(){
+        timeEl.textContent = time;
+        time--;
     
-    timeEl.textContent = time;
-    time--;
+        if (time < 0){
+
+
+            endQuiz();
+        }
+    },1000);
+
+    //timeEl = countDown;
+    // console.log(timeEl);
 
     //check if the user is out of time
-    if (time <= 0){
-        endQuiz();
-    }
+    
 }
 
 
 //end the quiz
 function endQuiz(){
 
-    clearInterval(timerId);
+    console.log("endQuiz check")
 
+    clearInterval(countDown);
 
 }
 
-clockCountDown();
+
 
 //save high scores
 
 
-startBtn.onclick = quizStart;
+startBtn.onclick = function(){
+    quizStart();
+}
