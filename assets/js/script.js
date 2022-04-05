@@ -2,7 +2,7 @@
 var questionsIndex = 0;
 
 //15 seconds per question about to be asked
-var time = questions.length*15;
+var time = 75;
 
 //keeps track of the time
 var timerId;
@@ -44,8 +44,9 @@ var questions = [
         title: "What is my first question?",
         choices: ["A", "B", "C","D"],
         answer: "C"
-    },
+    }
 ];
+
 
 
 //Start the quiz
@@ -53,11 +54,14 @@ function quizStart(){
     //hide the start screen during the quiz
     var startQuizEl = document.getElementById("start");
 
-    // make quetions appear
+    // make questions appear
 
-
+    questionsEl.removeAttribute("hide");
 
     //show starting time on the page
+    clockCountDown();
+
+
 
 
     getQuestions()
@@ -66,10 +70,20 @@ function quizStart(){
 
 
 //Get questions to show up
+function getQuestions(){
 
+    var currentQuestions = questions[questionsIndex];
+
+
+
+}
 
 
 //click questions and answers
+function clickQuestions(){
+
+
+}
 
 
 
@@ -77,8 +91,30 @@ function quizStart(){
 
 
 
-//time coiunt
+//time count
+function clockCountDown(){
+   
+
+    
+    timeEl.textContent = time;
+    time--;
+
+    //check if the user is out of time
+    if (time <= 0){
+        endQuiz();
+    }
+}
 
 
+
+function endQuiz(){
+
+
+}
+
+clockCountDown();
 
 //save high scores
+
+
+startBtn.onclick = quizStart;
