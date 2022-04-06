@@ -70,20 +70,24 @@ function quizStart(){
 
     clockCountDown();
     getQuestions();
+    clickAnswers();
 
 
 }
 
+var choicesBtn = "";
 
 //Get check which question that we want
 function getQuestions(){
     //gets a question from the questions using question index
     var currentQuestion = questions[questionsIndex].title;
     questionAppearedEl.textContent = currentQuestion;
-    var choicesBtn = "";
+
+    //for loop to get the current question and choices based off of questionsIndex
+    //loop gets all the choices based on the questions index that we increase on the get answers function below
     for(var i = 0; i < questions[questionsIndex].choices.length; i++){
         var currentChoice = questions[questionsIndex].choices[i];
-        console.log(currentChoice);
+        //each choice becomes its own button
         choicesBtn = choicesBtn + `
         <button> ${currentChoice} </button>
         </br>`;
@@ -100,8 +104,14 @@ function getQuestions(){
 
 
 //click questions and answers
-function clickQuestions(){
+function clickAnswers(event){
 
+    console.log(choicesBtn);
+    //console.log("I clicked " + testClick);
+    
+
+    //increase questionsIndex
+    questionsIndex++;
 
 }
 
