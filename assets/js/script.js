@@ -75,14 +75,14 @@ function quizStart(){
 
 }
 
-var choicesBtn = "";
+
 
 //Get check which question that we want
 function getQuestions(){
     //gets a question from the questions using question index
     var currentQuestion = questions[questionsIndex].title;
     questionAppearedEl.textContent = currentQuestion;
-
+    var choicesBtn = "";
     //for loop to get the current question and choices based off of questionsIndex
     //loop gets all the choices based on the questions index that we increase on the get answers function below
     for(var i = 0; i < questions[questionsIndex].choices.length; i++){
@@ -106,8 +106,11 @@ function getQuestions(){
 //click questions and answers
 function clickAnswers(event){
 
-    console.log(choicesBtn);
-    //console.log("I clicked " + testClick);
+    //assigning a variable to choicesEl.textcontent to get the answers
+    var allAnswers = choicesEl.textContent;
+    console.log(allAnswers);
+    
+
     
 
     //increase questionsIndex
