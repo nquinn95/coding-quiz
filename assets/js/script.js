@@ -35,12 +35,12 @@ var questions = [
         answer: "D"
     },
     {
-        title: "What is my first question?",
+        title: "What is my fourth question?",
         choices: ["A", "B", "C","D"],
         answer: "D"
     },
     {
-        title: "What is my first question?",
+        title: "What is my fifth question?",
         choices: ["A", "B", "C","D"],
         answer: "C"
     }
@@ -70,7 +70,7 @@ function quizStart(){
 
     clockCountDown();
     getQuestions();
-    clickAnswers();
+
 
 
 }
@@ -80,6 +80,7 @@ function quizStart(){
 //Get check which question that we want
 function getQuestions(){
     //gets a question from the questions using question index
+    console.log(questionsIndex);
     var currentQuestion = questions[questionsIndex].title;
     questionAppearedEl.textContent = currentQuestion;
     var choicesBtn = "";
@@ -89,7 +90,7 @@ function getQuestions(){
         var currentChoice = questions[questionsIndex].choices[i];
         //each choice becomes its own button
         choicesBtn = choicesBtn + `
-        <button> ${currentChoice} </button>
+        <button class="answer"> ${currentChoice} </button>
         </br>`;
         
         //questionsEl.appendChild(questionAppearedEl, currentQuestion)
@@ -101,25 +102,6 @@ function getQuestions(){
 //right or wrong answer
 //questions index ++ to move to the next question in the array.
 //execute getQestion function for next question
-
-
-//click questions and answers
-function clickAnswers(event){
-
-    //assigning a variable to choicesEl.textcontent to get the answers
-    var allAnswers = choicesEl.textContent;
-    console.log(allAnswers);
-    
-
-    
-
-    //increase questionsIndex
-    questionsIndex++;
-
-}
-
-
-
 
 
 
@@ -156,9 +138,20 @@ function endQuiz(){
 
 }
 
+function getAnswer(event){
+    console.log(event.target);
+    if(event.target.matches(".answer")){
+        console.log(event.target.textContent);
+        //check to see the text content on the button is the same as questions[questionsindex].answer  if they are the same show correct.  if htey are not the same take 10 seconds off the time
+        questionsIndex++;
+        getQuestions();
+    }
+}
 
 
 //save high scores
+document.querySelector(".wrapper").addEventListener("click", getAnswer);
+
 
 
 startBtn.onclick = function(){
